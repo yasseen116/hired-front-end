@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Hired!{% endblock %}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
     <nav class="navbar">
-        <h1>Hired!</h1>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/jobs">Jobs</a></li>
-            <li><a href="/about">About</a></li>
-        </ul>
+        <a class="logo" href="/">Hired!</a>
+
+        <div class="nav-content">
+            
+            <ul class="nav-links">
+                <li><a href="/jobs">Browse Jobs</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+
+            <div class="search-bar">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" placeholder="Search about your Job">
+            </div>
+
+            <div class="auth-buttons">
+                <a href="/login" class="btn btn-login">Login</a>
+                <a href="/signup" class="btn btn-signup">Sign Up</a>
+            </div>
+        </div>
     </nav>
 
     <div id="app">
