@@ -5,6 +5,10 @@
     --primary-color: #0a66c2;
     --secondary-color: #004182;
 }
+@font-face {
+    font-family: 'Bionix';
+    src: url("../fonts/Bionix-demo.otf") format('otf');
+}
 body {
     margin: 0;
     padding: 0;
@@ -22,9 +26,9 @@ body {
     position: sticky;
 }
 .logo {
-    font-family: Poppins, sans-serif;
+    font-family: Bionix, sans-serif;
     font-size: 40px;
-    font-weight: 800;
+    font-weight: 500;
     color: var(--white);
     text-decoration: none;
     letter-spacing: -0.5px;
@@ -123,6 +127,10 @@ body {
     color: #000;
     margin-bottom: 10px;
     line-height: 1.2;
+}
+.hero-logo {
+    font-size: 2.7rem;
+    color: var(--primary-color);
 }
 .hero-text .subtitle {
     font-size: 1.5rem;
