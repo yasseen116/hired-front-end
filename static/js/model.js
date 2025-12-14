@@ -88,3 +88,26 @@ class JobModel {
         return mockData.map(job => new JobModel(job));
     }
 }
+
+class CompanyModel {
+    static getTopCompanies() {
+        return [
+            { name: "LC Waikiki", logo: "../static/images/companies/lcwaikiki.png" },
+            { name: "Elsewedy Electric", logo: "../static/images/companies/elsewedy.png" },
+            { name: "Breadfast", logo: "../static/images/companies/breadfast.png" },
+            { name: "IBM", logo: "../static/images/companies/ibm.png" },
+            { name: "Microsoft", logo: "../static/images/companies/microsoft.png" },
+            { name: "Etoile", logo: "../static/images/companies/etoile.webp" },
+            { name: "Google", logo: "../static/images/companies/google.png" },
+            { name: "ValU", logo: "../static/images/companies/valu.webp" },
+            { name: "Juhayna", logo: "../static/images/companies/juhayna.png" },
+            { name: "CIB", logo: "../static/images/companies/cib.png" },
+            { name: "Orascom", logo: "../static/images/companies/orascom.png" },
+            { name: "Fawry", logo: "../static/images/companies/fawry.png" },
+            { name: "Palm Hills", logo: "../static/images/companies/palm.png" },
+            { name: "Vodafone", logo: "../static/images/companies/vodafone.png" },
+            { name: "NBE", logo: "../static/images/companies/nbe.png" },
+            { name: "Edita", logo: "../static/images/companies/edita.png" }
+        ];
+    }
+}

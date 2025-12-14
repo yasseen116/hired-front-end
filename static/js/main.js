@@ -3,23 +3,28 @@ const { createApp } = Vue;
 const app = createApp({
     data() {
         return {
-            jobs: [],         // Holds the list of jobs
-            searchTerm: '',   // Bound to the search input
-            isLoading: true,  // For showing a "Loading..." spinner
-            error: null       // For handling API errors later
+            jobs: [],         
+            searchTerm: '',   
+            isLoading: true,  
+            error: null,
+            
+            // 1. MAKE SURE THIS EXISTS
+            companies: [] 
         };
     },
     
-    // "mounted" runs automatically when the page loads
     async mounted() {
+        // Load Jobs
         await this.loadJobs();
+        
+        // 2. MAKE SURE THIS LINE EXISTS
+        // This pulls the data from your new Model into Vue
+        this.companies = CompanyModel.getTopCompanies();
     },
 
     computed: {
-        // Logic to filter jobs based on search input
         filteredJobs() {
             if (!this.searchTerm) return this.jobs;
-            
             const term = this.searchTerm.toLowerCase();
             return this.jobs.filter(job => 
                 job.title.toLowerCase().includes(term) ||
@@ -33,23 +38,43 @@ const app = createApp({
         async loadJobs() {
             try {
                 this.isLoading = true;
-                // CALLING THE MODEL
                 this.jobs = await JobModel.fetchAll();
             } catch (err) {
                 console.error("Failed to load jobs:", err);
-                this.error = "Could not load jobs. Please try again later.";
+                this.error = "Could not load jobs.";
             } finally {
                 this.isLoading = false;
             }
         },
 
+        scrollCompanies(direction) {
+            const container = document.querySelector('.companies-grid');
+            if (!container) return;
+
+            const scrollAmount = 300;
+            
+            const maxScroll = container.scrollWidth - container.clientWidth;
+
+            if (direction === 'left') {
+                if (container.scrollLeft <= 5) { // 5px buffer for safety
+                    container.scrollTo({ left: maxScroll, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                }
+            } else {
+                if (container.scrollLeft >= maxScroll - 5) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            }
+        },
+
         applyForJob(job) {
-            alert(`Application started for ${job.title} at ${job.company}`);
-            // Future logic: Send POST request to API
+            alert(`Application started for ${job.title}`);
         }
     },
 
-    // Crucial for Jinja compatibility
     compilerOptions: {
         delimiters: ['[[', ']]'] 
     }

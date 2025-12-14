@@ -69,4 +69,38 @@
 
         </div>
     </section>
+    <section class="companies-section">
+        <div class="container">
+            
+            <h2 class="section-title">Join Egypt's Top Companies</h2>
+
+            <div class="slider-wrapper">
+                
+                <button class="arrow-btn prev" @click="scrollCompanies('left')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="companies-grid">
+                    <div 
+                        v-for="(company, index) in companies" 
+                        :key="index" 
+                        class="company-box">
+                        
+                        <img :src="company.logo" :alt="company.name" class="company-logo">
+                    
+                    </div>
+                </div>
+
+                <button class="arrow-btn next" @click="scrollCompanies('right')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+
+            </div>
+
+        </div>
+    </section>
 {% endblock %}
