@@ -576,7 +576,7 @@ body {
 .form-actions {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 25px;
     font-size: 0.9rem;
     font-family: Poppins, sans-serif;
@@ -596,8 +596,8 @@ body {
 
 .checkbox-label input {
     accent-color: var(--primary-color);
-    width: 16px;
-    height: 16px;
+    width: 11px;
+    height: 11px;
 }
 
 .forgot-link {
