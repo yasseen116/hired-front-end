@@ -7,7 +7,7 @@
 }
 @font-face {
     font-family: 'Bionix';
-    src: url("../fonts/Bionix-demo.otf") format('otf');
+    src: url("../fonts/Bionix-demo.otf") format('opentype');
 }
 body {
     margin: 0;
