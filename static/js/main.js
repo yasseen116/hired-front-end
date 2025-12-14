@@ -8,17 +8,13 @@ const app = createApp({
             isLoading: true,  
             error: null,
             
-            // 1. MAKE SURE THIS EXISTS
             companies: [] 
         };
     },
     
     async mounted() {
-        // Load Jobs
         await this.loadJobs();
         
-        // 2. MAKE SURE THIS LINE EXISTS
-        // This pulls the data from your new Model into Vue
         this.companies = CompanyModel.getTopCompanies();
     },
 
@@ -56,7 +52,7 @@ const app = createApp({
             const maxScroll = container.scrollWidth - container.clientWidth;
 
             if (direction === 'left') {
-                if (container.scrollLeft <= 5) { // 5px buffer for safety
+                if (container.scrollLeft <= 5) {
                     container.scrollTo({ left: maxScroll, behavior: 'smooth' });
                 } else {
                     container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });

@@ -14,10 +14,8 @@ class JobModel {
      * Future: You will replace the body of this function with 'return fetch("/api/jobs");'
      */
     static async fetchAll() {
-        // simulate a network delay of 0.5 seconds (optional, makes it feel real)
         await new Promise(resolve => setTimeout(resolve, 500));
 
-        // The "Mock" Database based on your screenshot
         const mockData = [
             {
                 id: 1,

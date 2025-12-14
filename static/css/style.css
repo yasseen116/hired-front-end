@@ -317,7 +317,7 @@ body {
 }
 
 .companies-section .section-title {
-    color: var(--hired-blue);
+    color: var(--primary-color);
     margin-bottom: 40px;
     font-weight: 700;
 }
