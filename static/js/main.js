@@ -44,7 +44,8 @@ const app = createApp({
         async loadJobs() {
             try {
                 this.isLoading = true;
-                this.jobs = await JobModel.fetchAll();
+                // UPDATED: Changed from fetchAll() to getAll()
+                this.jobs = await JobModel.getAll();
             } catch (err) {
                 console.error("Failed to load jobs:", err);
                 this.error = "Could not load jobs.";
@@ -89,7 +90,8 @@ const app = createApp({
         },
 
         applyForJob(job) {
-            alert(`Application started for ${job.title}`);
+            // Optional: You can redirect to details page here if needed
+            window.location.href = `/job-details.html?id=${job.id}`;
         }
     },
 

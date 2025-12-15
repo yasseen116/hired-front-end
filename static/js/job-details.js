@@ -3,51 +3,42 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            job: {
-                title: "Software Engineer",
-                company: "Fawry",
-                location: "Smart Village",
-                experience: "0 - 5 Years",
-                salary: "Negotiable",
-                logoColor: "#ffd700",
-                description: [
-                    "We are seeking a highly experienced Senior Software Testing Engineer to lead end-to-end testing activities across web, mobile, backend services, and integrated systems.",
-                    "The ideal candidate has strong analytical skills, deep knowledge of testing methodologies, and the ability to ensure product quality within fast-paced Agile environments."
-                ],
-                responsibilities: [
-                    "Test Planning & Strategy",
-                    "Test Case Design & Execution",
-                    "Automation Testing",
-                    "API & Backend Testing",
-                    "Performance & Security Testing",
-                    "Collaboration & Leadership",
-                    "Reporting & Documentation"
-                ],
-                softSkills: [
-                    "Strong ownership and accountability",
-                    "Leadership & mentoring abilities",
-                    "Attention to detail",
-                    "Problem-solving mindset",
-                    "Ability to work in a fast-paced, collaborative environment",
-                    "Excellent documentation and communication skills"
-                ],
-                qualifications: [
-                    "Experience with microservices and distributed systems.",
-                    "Automation experience using Python, Java, or JavaScript."
-                ]
-            },
-
-            // Mock Data for Sidebar
-            similarJobs: [
-                { id: 1, title: "Software Engineer", company: "Bank Misr", location: "Maadi", experience: "0 - 5 Years", logoColor: "#eab308" },
-                { id: 2, title: "Software Engineer", company: "Town Team", location: "Alexandria", experience: "0 - 2 Years", logoColor: "#000000" },
-                { id: 3, title: "Software Engineer", company: "Monginis", location: "Zagazig", experience: "5 - 10 Years", logoColor: "#ec4899" },
-                { id: 4, title: "Backend Developer", company: "LC Waikiki", location: "Remote", experience: "0 - 5 Years", logoColor: "#3b82f6" },
-                { id: 5, title: "Frontend Developer", company: "Bank Misr", location: "Helwan", experience: "0 - 5 Years", logoColor: "#eab308" },
-                { id: 6, title: "Requirement Engineer", company: "Microsoft", location: "Cairo", experience: "5 - 10 Years", logoColor: "#f97316" }
-            ]
+            loading: true,
+            job: {}, // Starts empty, will be filled by the Model
+            similarJobs: [],
+            error: null
         }
     },
+    
+    async mounted() {
+        // 1. Get the Job ID from the URL (e.g., job-details.html?id=1)
+        const urlParams = new URLSearchParams(window.location.search);
+        // Default to ID 1 (Fawry) if no ID is provided, just so the page isn't broken during testing
+        const jobId = urlParams.get('id') || 1; 
+
+        console.log("Attempting to load Job ID:", jobId);
+
+        try {
+            this.loading = true;
+            
+            // 2. Ask the Model for the specific Job Data
+            this.job = await JobModel.getById(jobId);
+            
+            // 3. Ask Model for similar jobs based on the title
+            if (this.job && this.job.title) {
+                // Example: Take the first word (e.g., "Software" from "Software Engineer")
+                const keyword = this.job.title.split(' ')[0];
+                this.similarJobs = JobModel.getSimilar(jobId, keyword);
+            }
+
+        } catch (err) {
+            console.error("Error loading job details:", err);
+            this.error = "Job not found!";
+        } finally {
+            this.loading = false;
+        }
+    },
+    
     compilerOptions: {
         delimiters: ['[[', ']]']
     }
