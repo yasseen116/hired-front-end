@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hired</title>
+    <title>Sign Up - Hired</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -37,106 +37,116 @@
 
     <div id="app">
         
-    <header class="hero-section">
-        <div class="container hero-layout">
-            <div class="hero-text">
-                <h1>Welcome to <span class="logo hero-logo">Hired</span></h1>
-                <p class="subtitle">Your path to real job opportunities starts here.</p>
-                
-                <div class="hero-description">
-                    <p>– Hired helps you find real jobs that match your skills and career goals.</p>
-                    <p>– Apply easily, track applications, and connect with trusted companies all in one place</p>
-                </div>
-
-                <ul class="hero-features">
-                    <li>Browse real and verified job listings</li>
-                    <li>Apply with one click</li>
-                    <li>Track your application progress</li>
-                </ul>
-
-                <a href="/signup" class="btn btn-primary btn-large">
-                    Get Started
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px; vertical-align: middle;">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
-            </div>
-            <div class="hero-image">
-                <img src="../static/images/hero-image.jpg" alt="Hero Image">
-            </div>
-        </div>
-    </header>
-    <section class="featured-jobs-section" id="jobs-anchor">
-        <div class="container">
-            <h2 class="section-title">Featured Jobs</h2>
-
-            <div v-if="isLoading" style="text-align: center; padding: 40px;">
-                <p>Loading opportunities...</p>
-            </div>
-
-            <div v-if="error" style="color: red; text-align: center;">
-                <p>[[ error ]]</p>
-            </div>
-
-            <div class="jobs-grid" v-if="!isLoading">
-                
-                <div class="job-card" v-for="job in filteredJobs.slice(0, 8)" :key="job.id">
-                    <h3 class="job-title">[[ job.title ]]</h3>
-                    
-                    <div class="job-details">
-                        <p>Company : <span class="highlight-red">[[ job.company ]]</span></p>
-                        <p>Location : <span class="highlight-red">[[ job.location ]]</span></p>
-                        <p>Experience : <span class="highlight-red">[[ job.experience ]]</span></p>
-                        <p>Salary : <span class="highlight-red">[[ job.salary ]]</span></p>
-                    </div>
-
-                    <div class="card-actions">
-                        <button class="btn btn-card-apply" @click="applyForJob(job)">Apply</button>
-                        <button class="btn btn-card-details">Details</button>
-                    </div>
-                </div>
-                </div>
-
-            <div class="view-all-container">
-                <a href="/jobs" class="btn btn-view-all">View All Jobs</a>
-            </div>
-
-        </div>
-    </section>
-    <section class="companies-section">
-        <div class="container">
+<div class="auth-section">
+    <div class="container auth-container">
+        
+        <div class="auth-card">
             
-            <h2 class="section-title">Join Egypt's Top Companies</h2>
+            <div class="auth-header">
+                <h2 class="auth-title">Create Account</h2>
+                <p class="auth-subtitle">Join Hired to boost your career today</p>
+            </div>
 
-            <div class="slider-wrapper">
-                
-                <button class="arrow-btn prev" @click="scrollCompanies('left')">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M15 18l-6-6 6-6"/>
-                    </svg>
-                </button>
-
-                <div class="companies-grid">
-                    <div 
-                        v-for="(company, index) in companies" 
-                        :key="index" 
-                        class="company-box">
-                        
-                        <img :src="company.logo" :alt="company.name" class="company-logo">
-                    
-                    </div>
+            <form @submit.prevent="handleSignup" class="auth-form">
+    
+                <div v-if="errorMessage" style="color: red; margin-bottom: 15px; font-size: 0.9rem; font-family: Poppins, sans-serif;">
+                    [[ errorMessage ]]
                 </div>
 
-                <button class="arrow-btn next" @click="scrollCompanies('right')">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 18l6-6-6-6"/>
-                    </svg>
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" v-model="fullname" placeholder="John Doe" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="jobTitle">Job Title</label>
+                    <input type="text" id="jobTitle" v-model="jobTitle" placeholder="e.g. Software Engineer" required>
+                </div>
+
+                <div class="form-group" style="position: relative;">
+                    <label>Skills</label>
+                    
+                    <transition-group name="skill-list" tag="div">
+                        
+                        <div v-for="(skill, index) in skills" :key="skill.id" class="skill-row">
+                            
+                            <input 
+                                type="text" 
+                                v-model="skill.value" 
+                                placeholder="e.g. Python" 
+                                required
+                            >
+                            
+                            <button 
+                                v-if="skills.length > 1" 
+                                type="button" 
+                                class="btn-icon btn-remove" 
+                                @click="removeSkill(index)"
+                            >
+                                &times;
+                            </button>
+                            
+                            <button 
+                                v-if="index === skills.length - 1" 
+                                type="button" 
+                                class="btn-icon btn-add" 
+                                @click="addSkill"
+                            >
+                                +
+                            </button>
+                        </div>
+
+                    </transition-group>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload CV</label>
+                    
+                    <input 
+                        type="file" 
+                        id="cv" 
+                        @change="handleFileUpload" 
+                        accept=".pdf,.doc,.docx"
+                        style="display: none;" 
+                        required
+                    >
+
+                    <label for="cv" class="custom-file-upload">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                        
+                        <span>[[ fileName || 'Choose a PDF or Word file...' ]]</span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" v-model="email" placeholder="name@company.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" v-model="password" placeholder="Create a password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" v-model="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+
+                <button type="submit" class="btn-login-action" :disabled="isLoading">
+                    <span v-if="isLoading">Creating account...</span>
+                    <span v-else>Sign Up</span>
                 </button>
 
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="/login">Sign In</a></p>
             </div>
 
         </div>
-    </section>
+    </div>
+</div>
 
     </div>
 
@@ -178,9 +188,8 @@
         </div>
     </footer>
     
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="../static/js/model.js"></script>
-    <script src="../static/js/main.js"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="../static/js/signup.js"></script>
 
 </body>
 </html>

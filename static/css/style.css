@@ -9,6 +9,11 @@
     font-family: 'Bionix';
     src: url("../fonts/Bionix-demo.otf") format('opentype');
 }
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -78,6 +83,7 @@ body {
     height: 18px;
     stroke: var(--light-gray);
     margin-right: 8px;
+    flex-shrink: 0;
 }
 .search-bar {
     background-color: var(--white);
@@ -93,6 +99,8 @@ body {
     outline: none;
     font-size: 17px;
     color: #333;
+    flex: 1;
+    min-width: 0;
 }
 .search-bar input::placeholder {
     color: #999;
@@ -546,7 +554,7 @@ body {
 }
 
 .auth-form label {
-    display: block;
+    display: flex;
     margin-bottom: 8px;
     font-weight: 500;
     color: var(--secondary-color);
@@ -554,6 +562,7 @@ body {
     font-family: Poppins, sans-serif;
 }
 
+.auth-form input[type="text"],
 .auth-form input[type="email"],
 .auth-form input[type="password"] {
     width: 100%;
@@ -566,11 +575,134 @@ body {
     background-color: #f8fafc;
 }
 
+.auth-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #64748b;
+    cursor: pointer;
+}
+
 .auth-form input:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(10, 102, 194, 0.1);
     background-color: #fff;
+}
+
+.skill-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.skill-row input {
+    flex: 1; 
+    margin-bottom: 0 !important;
+}
+
+.btn-icon {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-add {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-add:hover {
+    background-color: var(--secondary-color);
+}
+
+.btn-remove {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+.btn-remove:hover {
+    background-color: #fecaca;
+}
+
+.skill-list-enter-active,
+.skill-list-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.skill-list-enter-from,
+.skill-list-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.skill-list-leave-active {
+  position: absolute;
+  width: 100%; 
+  z-index: 0;
+}
+
+.skill-list-move {
+  transition: transform 0.3s ease-in-out;
+}
+
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 15px;
+    
+    background-color: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    
+    color: #64748b;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.custom-file-upload svg {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.custom-file-upload span {
+    display: inline-block;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.custom-file-upload:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background-color: #eff6ff;
+}
+
+.custom-file-upload.has-file {
+    border-style: solid;
+    border-color: var(--primary-color);
+    background-color: #eff6ff;
 }
 
 .form-actions {
