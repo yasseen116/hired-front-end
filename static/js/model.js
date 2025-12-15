@@ -8,18 +8,13 @@ class JobModel {
         this.salary = data.salary;
     }
 
-    /**
-     * SIMULATING AN API CALL
-     * currently: Returns "fake" data immediately.
-     * Future: You will replace the body of this function with 'return fetch("/api/jobs");'
-     */
     static async fetchAll() {
         await new Promise(resolve => setTimeout(resolve, 500));
 
         const mockData = [
             {
                 id: 1,
-                title: "Software Engineer (Testing)",
+                title: "Software Engineer",
                 company: "Fawry",
                 location: "Smart Village",
                 experience: "0-5 Years",
@@ -28,7 +23,7 @@ class JobModel {
             {
                 id: 2,
                 title: "Architectural engineer",
-                company: "Elsoadaa",
+                company: "Palm Hills",
                 location: "Giza",
                 experience: "0-5 Years",
                 salary: "Negotiable"
