@@ -133,7 +133,7 @@ body {
 }
 .hero-section {
     padding: 20px;
-    margin-left: 40px;
+    margin-left: 30px;
     background-color: #fff;
 }
 .hero-layout {
@@ -221,8 +221,8 @@ body {
     text-underline-offset: 8px;
 }
 .jobs-grid {
-    padding-left: 40px;
-    padding-right: 40px;
+    margin-left: 30px;
+    margin-right: 30px;
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     gap: 20px;
@@ -425,6 +425,7 @@ body {
     padding-bottom: 20px;
     gap: 40px;
     margin-left: 30px;
+    margin-right: 30px;
 }
 
 .footer-info {
