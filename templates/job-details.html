@@ -1,11 +1,15 @@
 {% extends "_base.html" %}
 
-{% block title %}Software Engineer - Hired{% endblock %}
+{% block title %}Job Details - Hired{% endblock %}
 
 {% block content %}
-<div id="app" class="container" style="margin-top: 40px; margin-bottom: 60px;">
+<div id="app" class="container" style="margin-top: 40px; margin-bottom: 60px; min-height: 400px;">
     
-    <div class="details-layout">
+    <div v-if="loading" style="text-align: center; padding: 50px; font-size: 1.2rem; color: #666;">
+        Loading job details...
+    </div>
+
+    <div v-else class="details-layout">
         
         <main class="job-main-content">
             
@@ -16,13 +20,16 @@
                         <h1 class="details-title">[[ job.title ]]</h1>
                         
                         <div class="meta-row">
-                            Location : <span class="highlight-red">[[ job.location ]]</span>
+                            <span class="meta-label">Location:</span>
+                            <span class="highlight-red">[[ job.location ]]</span>
                         </div>
                         <div class="meta-row">
-                            Experience : <span class="highlight-red">[[ job.experience ]]</span>
+                            <span class="meta-label">Experience:</span>
+                            <span class="highlight-red">[[ job.experience ]]</span>
                         </div>
                         <div class="meta-row">
-                            Salary : <span class="highlight-red">[[ job.salary ]]</span>
+                            <span class="meta-label">Salary:</span>
+                            <span class="highlight-red">[[ job.salary ]]</span>
                         </div>
 
                         <div class="action-buttons">
@@ -34,14 +41,10 @@
                     </div>
 
                     <div class="header-logo-section">
-                        <div class="company-logo-large" :style="{ backgroundColor: job.logoColor }">
-                            <img v-if="job.logoUrl" :src="job.logoUrl" alt="Company Logo">
-                            <span v-else>[[ job.company ]]</span>
+                        <div class="company-logo-large">
+                            <img v-if="job.logoUrl" :src="job.logoUrl" :alt="job.company">
+                            <span v-else style="color: #333; font-weight: bold;">[[ job.company ]]</span>
                         </div>
-                        <a href="#" class="visit-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                            Visit the Website
-                        </a>
                     </div>
                 </div>
             </div>
@@ -76,7 +79,7 @@
                 <hr class="divider">
 
                 <section class="body-group">
-                    <h3>Qualifications Needed:</h3>
+                    <h3>Qualifications:</h3>
                     <ol>
                         <li v-for="(qual, i) in job.qualifications" :key="i">[[ qual ]]</li>
                     </ol>
@@ -93,11 +96,14 @@
                 <div class="similar-list">
                     <div class="similar-item" v-for="simJob in similarJobs" :key="simJob.id">
                         <div class="similar-info">
-                            <h4 class="similar-job-title">[[ simJob.title ]]</h4>
+                            <a :href="'/job-details.html?id=' + simJob.id" class="similar-job-title">[[ simJob.title ]]</a>
                             <p class="similar-company">[[ simJob.company ]] <span class="text-muted">- [[ simJob.location ]]</span></p>
                             <p class="similar-exp">[[ simJob.experience ]]</p>
                         </div>
-                        <div class="similar-logo" :style="{ backgroundColor: simJob.logoColor }"></div>
+                        <div class="similar-logo">
+                            <img v-if="simJob.logoUrl" :src="simJob.logoUrl" :alt="simJob.company">
+                            <span v-else style="font-size: 0.6rem;">No Logo</span>
+                        </div>
                     </div>
                 </div>
 

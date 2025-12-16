@@ -8,7 +8,6 @@ const JobModel = {
             location: "Smart Village",
             experience: "0-5 Years",
             salary: "Negotiable",
-            logoColor: "#ffd700",
             logoUrl: "../static/images/companies/fawry.png",
             type: "On-site",
             description: [
@@ -43,7 +42,6 @@ const JobModel = {
             location: "Giza",
             experience: "0-5 Years",
             salary: "Negotiable",
-            logoColor: "#000000",
             logoUrl: "../static/images/companies/palm.png",
             type: "On-site",
             description: [
@@ -74,7 +72,6 @@ const JobModel = {
             location: "Alexandria",
             experience: "1-3 Years",
             salary: "Negotiable",
-            logoColor: "white",
             logoUrl: "../static/images/companies/ibm.png",
             type: "On-site",
             description: [
@@ -104,7 +101,6 @@ const JobModel = {
             location: "Zagazig",
             experience: "Not Required",
             salary: "3 K – 5 K / month",
-            logoColor: "#e91e63",
             logoUrl: null,
             type: "On-site",
             description: [
@@ -132,7 +128,6 @@ const JobModel = {
             location: "Banha",
             experience: "Not Required",
             salary: "5 K – 8 K / month",
-            logoColor: "#333",
             logoUrl: null,
             type: "On-site",
             description: [
@@ -160,7 +155,6 @@ const JobModel = {
             location: "Cairo",
             experience: "2-4 Years",
             salary: "Negotiable",
-            logoColor: "#8e44ad",
             logoUrl: null,
             type: "On-site",
             description: [
@@ -189,7 +183,6 @@ const JobModel = {
             location: "Maadi Branch 1",
             experience: "2-5 Years",
             salary: "Negotiable",
-            logoColor: "#eab308",
             logoUrl: "../static/images/companies/nbe.png",
             type: "On-site",
             description: [
@@ -218,7 +211,6 @@ const JobModel = {
             location: "Remote",
             experience: "Not Required",
             salary: "Negotiable",
-            logoColor: "#3b82f6",
             logoUrl: "../static/images/companies/lcwaikiki.png",
             type: "Remote",
             description: [
