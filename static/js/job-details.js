@@ -4,8 +4,15 @@ createApp({
     data() {
         return {
             loading: true,
-            job: {}, // Starts empty
-            similarJobs: []
+            job: {
+                description: [],
+                responsibilities: [],
+                softSkills: [],
+                qualifications: []
+            },
+            similarJobs: [],
+            error: null,
+            isCopied: false
         }
     },
     async mounted() {
@@ -29,6 +36,29 @@ createApp({
             this.loading = false;
         }
     },
+
+    methods: {
+        async copyLink() {
+            try {
+                // 1. Get the current browser URL
+                const link = window.location.href;
+                
+                // 2. Write it to the clipboard
+                await navigator.clipboard.writeText(link);
+                
+                // 3. Show "Copied" state for 1.25 seconds
+                this.isCopied = true;
+                setTimeout(() => {
+                    this.isCopied = false;
+                }, 1250);
+
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+                alert("Could not copy link automatically. Please copy the URL from the address bar.");
+            }
+        }
+    },
+
     compilerOptions: {
         delimiters: ['[[', ']]']
     }
