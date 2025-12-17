@@ -10,6 +10,10 @@
     src: url("../fonts/Bionix-demo.otf") format('opentype');
 }
 
+* {
+    font-family: Poppins, sans-serif;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -49,7 +53,6 @@ body {
     gap: 20px;
     margin: 0;
     padding: 0;
-    font-family: Poppins, sans-serif;
 }
 .nav-links a {
     color: var(--white);
@@ -161,7 +164,6 @@ body {
     border-radius: 6px;
     font-weight: 700;
     transition: transform 0.1s;
-    font-family: Poppins, sans-serif;
     font-size: 16px;
 }
 .btn-login {
@@ -196,7 +198,6 @@ body {
 .hero-text {
     flex: 1;
     max-width: 600px;
-    font-family: Poppins, sans-serif;
 }
 .hero-text h1 {
     font-size: 2.7rem;
@@ -263,7 +264,6 @@ body {
 .section-title {
     text-align: center;
     color: var(--primary-color);
-    font-family: Poppins, sans-serif;
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 40px;
@@ -294,7 +294,6 @@ body {
 .job-title {
     color: var(--primary-color);
     font-size: 1.2rem;
-    font-family: Poppins, sans-serif;
     text-align: center;
     margin-bottom: 5px;
     margin-top: 0px;
@@ -326,14 +325,12 @@ body {
 }
 .job-details p {
     font-size: 0.95rem;
-    font-family: Poppins, sans-serif;
     margin-bottom: 8px;
     color: #333;
     font-weight: 500;
 }
 .highlight-red {
     color: #ff3131;
-    font-family: Poppins, sans-serif !important;
 }
 .card-actions {
     display: flex;
@@ -512,7 +509,6 @@ body {
 
 .footer-desc {
     font-size: 1.1rem;
-    font-family: Poppins, sans-serif;
     line-height: 1.6;
     color: #e0e7ff;
 }
@@ -524,7 +520,6 @@ body {
 
 .footer-socials h3 {
     font-size: 1.5rem;
-    font-family: Poppins, sans-serif;
     font-weight: 700;
     margin-bottom: 15px;
     border-bottom: 2px solid var(--white);
@@ -569,7 +564,6 @@ body {
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 1rem;
-    font-family: Poppins, sans-serif;
     color: #cbd5e1;
 }
 
@@ -618,7 +612,6 @@ body {
 .auth-subtitle {
     color: var(--light-gray);
     font-size: 0.95rem;
-    font-family: Poppins, sans-serif;
     margin: 0;
 }
 
@@ -633,7 +626,6 @@ body {
     font-weight: 500;
     color: var(--secondary-color);
     font-size: 0.9rem;
-    font-family: Poppins, sans-serif;
 }
 
 .auth-form input[type="text"],
@@ -785,7 +777,6 @@ body {
     align-items: baseline;
     margin-bottom: 25px;
     font-size: 0.9rem;
-    font-family: Poppins, sans-serif;
 }
 
 .form-actions label {
@@ -841,7 +832,6 @@ body {
     text-align: center;
     margin-top: 20px;
     font-size: 0.9rem;
-    font-family: Poppins, sans-serif;
     color: #64748b;
     border-top: 1px solid #f1f5f9;
 }
@@ -957,7 +947,6 @@ body {
 .details-title {
     color: var(--primary-color);
     font-size: 1.75rem;
-    font-family: Poppins, sans-serif;
     font-weight: 700;
     margin-top: 0;
     margin-bottom: 15px;
@@ -965,7 +954,6 @@ body {
 }
 
 .meta-row {
-    font-family: Poppins, sans-serif;
     margin-bottom: 10px;
     color: #111;
     font-weight: 600;
@@ -1047,7 +1035,6 @@ body {
     color: var(--primary-color);
     text-decoration: none;
     font-size: 0.95rem;
-    font-family: Poppins, sans-serif;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -1056,10 +1043,6 @@ body {
 
 .visit-link:hover {
     text-decoration: underline;
-}
-
-.body-group {
-    font-family: Poppins, sans-serif;
 }
 
 .body-group h3 {
@@ -1087,10 +1070,6 @@ body {
     border: 0;
     border-top: 1px solid #e5e7eb;
     margin: 30px 0;
-}
-
-.sidebar {
-    font-family: Poppins, sans-serif;
 }
 
 .sidebar-title {
