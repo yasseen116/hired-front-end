@@ -16,6 +16,7 @@ createApp({
             this.isLoading = true;
             this.errorMessage = null;
 
+            // 1. Basic Validation
             if (!this.email || !this.password) {
                 this.errorMessage = "Please fill in all fields.";
                 this.isLoading = false;
@@ -25,13 +26,27 @@ createApp({
             try {
                 console.log("Attempting login for:", this.email);
                 
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                // Simulate network delay (1.5 seconds)
+                await new Promise(resolve => setTimeout(resolve, 1500));
 
-                alert(`Login Successful! Welcome back, ${this.email}`);
+                // 2. CREATE FAKE USER DATA
+                const fakeName = this.email.split('@')[0];
+                const user = {
+                    name: fakeName,
+                    email: this.email,
+                    token: "mock-token-12345"
+                };
+
+                // 3. SAVE TO LOCAL STORAGE (Crucial Step!)
+                // This saves the user so the Navbar can find it
+                localStorage.setItem('user', JSON.stringify(user));
+
+                // 4. REDIRECT TO HOME PAGE
+                window.location.href = '/preview/index.html';
 
             } catch (error) {
+                console.error(error);
                 this.errorMessage = "Invalid email or password.";
-            } finally {
                 this.isLoading = false;
             }
         }

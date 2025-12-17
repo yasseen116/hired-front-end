@@ -17,10 +17,6 @@ createApp({
     },
     
     methods: {
-        handleFileUpload(event) {
-            this.cvFile = event.target.files[0];
-        },
-
         addSkill() {
             this.skills.push({ id: Date.now(), value: '' });
         },
@@ -28,6 +24,14 @@ createApp({
         removeSkill(index) {
             if (this.skills.length > 1) {
                 this.skills.splice(index, 1);
+            }
+        },
+
+        handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                this.cvFile = file;
+                this.fileName = file.name;
             }
         },
 
@@ -46,28 +50,29 @@ createApp({
                 .filter(val => val.trim() !== "");
 
             try {
-                console.log("Signup Data:", {
-                    name: this.fullname,
-                    skills: cleanSkills,
-                    file: this.cvFile ? this.cvFile.name : "None"
-                });
-                
+                // Simulate network request
                 await new Promise(resolve => setTimeout(resolve, 2000));
 
-                alert(`Account created! Skills: ${cleanSkills.join(", ")}`);
+                // 1. CREATE USER OBJECT
+                // Use the real name they typed in the form
+                const user = {
+                    name: this.fullname, 
+                    email: this.email,
+                    jobTitle: this.jobTitle,
+                    skills: cleanSkills,
+                    token: "new-user-token-123"
+                };
+
+                // 2. SAVE TO LOCAL STORAGE (Logs them in)
+                localStorage.setItem('user', JSON.stringify(user));
+
+                // 3. REDIRECT TO HOME PAGE
+                window.location.href = '/preview/index.html';
                 
             } catch (error) {
+                console.error(error);
                 this.errorMessage = "Something went wrong.";
-            } finally {
                 this.isLoading = false;
-            }
-        },
-
-        handleFileUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                this.cvFile = file;
-                this.fileName = file.name;
             }
         }
     },

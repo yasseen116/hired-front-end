@@ -10,7 +10,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <a class="logo" href="/">Hired</a>
+        <a class="logo" href="/preview/index.html">Hired</a>
 
         <div class="nav-content">
             
@@ -29,9 +29,70 @@
             </div>
 
             <div class="auth-buttons">
-                <a href="/login" class="btn btn-login">Login</a>
-                <a href="/signup" class="btn btn-signup">Sign Up</a>
+    
+                <div id="guest-view" class="auth-row">
+                    <a href="/preview/login.html" class="btn btn-login">Login</a>
+                    <a href="/preview/signup.html" class="btn btn-signup">Sign Up</a>
+                </div>
+
+                <div id="user-view" class="auth-row user-row" style="display: none;">
+                    
+                    <a href="/wishlist" class="nav-icon-circle" title="My Wishlist">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    </a>
+
+                    <a href="/profile" class="nav-profile-link" title="Go to Profile">
+                        <div class="nav-icon-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
+                        <span class="user-greeting">Hi, User</span>
+                    </a>
+
+                    <button onclick="logout()" class="btn btn-logout">
+                        Logout
+                    </button>
+
+                </div>
+
             </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    // 1. GET USER FROM LOCAL STORAGE
+                    // Real logic: We check if there is a saved user object
+                    const userJson = localStorage.getItem('user');
+                    const isLoggedIn = userJson !== null; 
+
+                    // 2. GET HTML ELEMENTS
+                    const guestView = document.getElementById('guest-view');
+                    const userView = document.getElementById('user-view');
+                    const greeting = document.querySelector('.user-greeting');
+
+                    // 3. TOGGLE VIEWS
+                    if (isLoggedIn) {
+                        // -- LOGGED IN STATE --
+                        if(guestView) guestView.style.display = 'none';
+                        if(userView) userView.style.display = 'flex';
+                        
+                        // Optional: Update the name dynamically
+                        if (greeting) {
+                            const user = JSON.parse(userJson);
+                            greeting.textContent = "Hi, " + (user.name || "User");
+                        }
+                    } else {
+                        // -- GUEST STATE --
+                        if(guestView) guestView.style.display = 'flex';
+                        if(userView) userView.style.display = 'none';
+                    }
+                });
+
+                // 4. HELPER: LOGOUT FUNCTION
+                // You can call this function to sign out
+                function logout() {
+                    localStorage.removeItem('user'); // Deletes the data
+                    window.location.href = '/preview/login.html'; // Redirects to login
+                }
+            </script>
         </div>
     </nav>
 

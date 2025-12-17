@@ -89,9 +89,9 @@ const app = createApp({
             }
         },
 
-        applyForJob(job) {
+        showJobDetails(job) {
             // Optional: You can redirect to details page here if needed
-            window.location.href = `/job-details.html?id=${job.id}`;
+            window.location.href = `/preview/job-details.html?id=${job.id}`;
         }
     },
 
