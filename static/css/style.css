@@ -304,15 +304,13 @@ body {
     justify-content: center;
 }
 
-/* Add this to static/css/style.css */
-
 .job-card-logo {
-    height: 70px;          /* Fixed height to keep cards aligned */
+    height: 70px;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers the logo horizontally */
-    margin-bottom: 15px;     /* Space between logo and details */
+    justify-content: center;
+    margin-bottom: 15px;
     text-align: center;
 }
 
@@ -320,9 +318,9 @@ body {
     display: flex;
     width: 150px;
     height: 150px;
-    object-fit: contain;   /* Keeps logo aspect ratio perfect */
-    max-height: 100%;      /* Ensures logo fits inside the 60px height */
-    max-width: 100%;      /* Prevents logo from getting too wide */
+    object-fit: contain;
+    max-height: 100%;
+    max-width: 100%;
     align-items: center;
     justify-content: center;
 }
