@@ -142,8 +142,14 @@
             <div class="jobs-grid" v-if="!isLoading">
                 
                 <div class="job-card" v-for="job in filteredJobs.slice(0, 8)" :key="job.id">
+    
                     <h3 class="job-title">[[ job.title ]]</h3>
                     
+                    <div class="job-card-logo">
+                        <img v-if="job.logoUrl" :src="job.logoUrl" :alt="job.company">
+                        <div v-else style="font-weight:bold; color:#555;">[[ job.company ]]</div>
+                    </div>
+
                     <div class="job-details">
                         <p>Company : <span class="highlight-red">[[ job.company ]]</span></p>
                         <p>Location : <span class="highlight-red">[[ job.location ]]</span></p>
@@ -155,6 +161,7 @@
                         <button class="btn btn-card-apply">Apply</button>
                         <button class="btn btn-card-details" @click="showJobDetails(job)">Details</button>
                     </div>
+
                 </div>
             </div>
 

@@ -32,7 +32,7 @@ const JobModel = {
         },
         {
             id: 2,
-            title: "Software Engineer (Backend)",
+            title: "Software Developer",
             company: "IBM",
             location: "Giza",
             experience: "3-5 Years",
@@ -61,7 +61,7 @@ const JobModel = {
         },
         {
             id: 3,
-            title: "Software Engineer (Frontend)",
+            title: "Software Develper",
             company: "Vodafone",
             location: "Smart Village, Cairo",
             experience: "1-3 Years",
@@ -119,7 +119,7 @@ const JobModel = {
         },
         {
             id: 5,
-            title: "Financial Analyst (Risk)",
+            title: "Financial Analyst",
             company: "National Bank of Egypt",
             location: "Downtown Cairo",
             experience: "3-6 Years",
