@@ -1,0 +1,78 @@
+{% extends "_base.html" %}
+
+{% block title %}My Wishlist - Hired{% endblock %}
+
+{% block content %}
+<div class="wishlist-page" id="wishlist-app">
+    <div class="container">
+        
+        <div class="section-header">
+            <h1>My Saved Jobs</h1>
+            <p>Manage the opportunities you are interested in.</p>
+        </div>
+
+        <div v-if="isLoading" class="loading-state">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p>Loading your saved jobs...</p>
+        </div>
+
+        <transition name="fade" mode="out-in" v-else>
+            <div v-if="savedJobs.length === 0" key="empty" class="empty-state">
+                <div class="empty-icon">💔</div>
+                <h3>No Saved Jobs Yet</h3>
+                <p>
+                    You haven't bookmarked any opportunities. Browse our job listings and save the ones that match your skills!
+                </p>
+                <a href="/preview/browse-jobs.html" class="btn btn-primary">Browse Jobs</a>
+            </div>
+
+            <div v-else key="jobs">
+                <transition-group name="job-list" tag="div" class="wishlisted-jobs-grid">
+                
+                <div class="job-card" v-for="job in savedJobs" :key="job.id">
+                    
+                    <h3 class="job-title">[[ job.title ]]</h3>
+                    
+                    <div class="job-card-logo">
+                        <img v-if="job.logoUrl" :src="job.logoUrl" :alt="job.company">
+                        <div v-else class="text-logo">[[ job.company ]]</div>
+                    </div>
+
+                    <div class="job-details">
+                        <p>Company: <span class="highlight-red">[[ job.company ]]</span></p>
+                        <p>Location: <span class="highlight-red">[[ job.location ]]</span></p>
+                        <p>Experience: <span class="highlight-red">[[ job.experience ]]</span></p>
+                        <p>Salary: <span class="highlight-red">[[ job.salary ]]</span></p>
+                        <p>Type: <span class="highlight-red">[[ job.type ]]</span></p>
+                    </div>
+
+                    <div class="card-actions">
+                        <button 
+                            class="btn btn-share-icon btn-remove-job" 
+                            @click="removeFromWishlist(job.id)" 
+                            title="Remove from Wishlist"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="1" y1="1" x2="21" y2="21"></line>
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+
+                        <button class="btn btn-card-apply">Apply</button>
+                        <button class="btn btn-card-details" @click="goToDetails(job.id)">Details</button>
+                    </div>
+
+                </div>
+
+            </transition-group>
+        </div>
+        </transition>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}    
+    <script src="../static/js/model.js"></script>
+    <script src="../static/js/wishlist.js"></script>
+{% endblock %}
