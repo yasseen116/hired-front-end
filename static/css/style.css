@@ -287,7 +287,7 @@ body {
     text-decoration-color: var(--primary-color);
     text-underline-offset: 8px;
 }
-.wishlisted-jobs-grid {
+.jobs-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
     gap: 20px;
@@ -1621,6 +1621,15 @@ body {
 
 .empty-state p {
     color: #666; max-width: 400px; margin: 10px auto 30px;
+}
+
+.wishlisted-jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto 40px auto;
+    padding: 0 30px;
 }
 
 .btn-remove-job {
