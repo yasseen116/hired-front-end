@@ -42,7 +42,7 @@ createApp({
                 localStorage.setItem('user', JSON.stringify(user));
 
                 // 4. REDIRECT TO HOME PAGE
-                window.location.href = '/preview/index.html';
+                window.location.href = 'index.html';
 
             } catch (error) {
                 console.error(error);

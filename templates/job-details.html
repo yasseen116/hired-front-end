@@ -132,7 +132,7 @@
                     <div class="similar-list">
                         <div class="similar-item" v-for="simJob in similarJobs" :key="simJob.id">
                             <div class="similar-info">
-                                <a :href="'/preview/job-details.html?id=' + simJob.id" class="similar-job-title">[[ simJob.title ]]</a>
+                                <a :href="'job-details.html?id=' + simJob.id" class="similar-job-title">[[ simJob.title ]]</a>
                                 <p class="similar-company">[[ simJob.company ]] <span class="text-muted">- [[ simJob.location ]]</span></p>
                                 <p class="similar-exp">[[ simJob.experience ]]</p>
                             </div>

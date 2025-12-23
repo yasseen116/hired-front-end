@@ -102,7 +102,7 @@ const app = createApp({
         },
 
         showJobDetails(job) {
-            window.location.href = `/preview/job-details.html?id=${job.id}`;
+            window.location.href = `job-details.html?id=${job.id}`;
         },
 
         openApplyModal(job) {
@@ -112,7 +112,7 @@ const app = createApp({
                 this.showLoginNotification = true;
 
                 setTimeout(() => {
-                    window.location.href = '/preview/login.html';
+                    window.location.href = 'login.html';
                 }, 2000);
                 
                 return;

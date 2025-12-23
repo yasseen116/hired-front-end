@@ -114,7 +114,7 @@ createApp({
                 this.showLoginNotification = true;
 
                 setTimeout(() => {
-                    window.location.href = '/preview/login.html';
+                    window.location.href = 'login.html';
                 }, 2000);
                 
                 return;
