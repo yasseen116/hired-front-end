@@ -2016,3 +2016,35 @@ body {
 .badge-pending { background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5; }
 .badge-accepted { background: #f0fdf4; color: #15803d; border: 1px solid #dcfce7; }
 .badge-rejected { background: #fef2f2; color: #b91c1c; border: 1px solid #fee2e2; }
+
+/* =========================
+   DELETE MODAL ANIMATION ("Pop" Effect)
+   ========================= */
+
+/* 1. Base transition state for the Overlay wrapper */
+.delete-pop-enter-active,
+.delete-pop-leave-active {
+    transition: opacity 0.3s ease;
+}
+
+/* 2. Base transition state for the Modal Card inside */
+/* We use a cubic-bezier for a slight bounce effect on entry */
+.delete-pop-enter-active .modal-card {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.delete-pop-leave-active .modal-card {
+    transition: all 0.2s ease-in;
+}
+
+/* 3. Starting state for enter / Ending state for leave */
+/* Overlay fades out, Card shrinks down */
+.delete-pop-enter-from,
+.delete-pop-leave-to {
+    opacity: 0;
+}
+
+.delete-pop-enter-from .modal-card,
+.delete-pop-leave-to .modal-card {
+    opacity: 0;
+    transform: scale(0.8); /* Start 20% smaller */
+}

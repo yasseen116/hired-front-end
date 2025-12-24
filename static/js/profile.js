@@ -5,6 +5,8 @@ createApp({
         return {
             loading: true,
             isSaving: false,
+
+            // User Data
             user: {
                 name: '',
                 jobTitle: '',
@@ -14,11 +16,18 @@ createApp({
                 about: '',
                 photo: null,
                 skills: [],
-                experience: [], // Array of {id, role, company, years}
-                education: [],  // Array of {id, degree, university, year}
+                experience: [],
+                education: [],
                 cvName: null
             },
-            applications: []
+            applications: [],
+
+            // Notification States
+            showSuccessNotification: false,
+            successMessage: '',
+
+            // NEW: Delete Modal State
+            showDeleteModal: false
         }
     },
     async mounted() {
@@ -30,12 +39,11 @@ createApp({
                 // 1. Get User Data
                 const storedUser = JSON.parse(localStorage.getItem('user'));
                 if (!storedUser) {
-                    // Redirect if not logged in
                     window.location.href = 'login.html';
                     return;
                 }
 
-                // 2. Hydrate Skills (Convert simple strings to objects for animation)
+                // 2. Hydrate Skills
                 let formattedSkills = [];
                 if (storedUser.skills && storedUser.skills.length > 0) {
                     formattedSkills = storedUser.skills.map((s, i) => ({ id: Date.now() + i, value: s }));
@@ -59,7 +67,6 @@ createApp({
                 // 5. Get Applications
                 const rawApps = JSON.parse(localStorage.getItem('my_applications') || '[]');
 
-                // Enhance app data with Job Titles from Model
                 const enrichedApps = await Promise.all(rawApps.map(async (app) => {
                     try {
                         const job = await JobModel.getById(app.jobId);
@@ -96,7 +103,6 @@ createApp({
             if (file) {
                 this.user.cvName = file.name;
 
-                // Save for preview
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     try {
@@ -108,39 +114,49 @@ createApp({
                 reader.readAsDataURL(file);
             }
         },
-        // Preview Function ---
+
         previewCv() {
             if (!this.user.cvName) return;
-
-            // 1. Try to get the real file from our simulation storage
             const base64File = localStorage.getItem('user_cv_file');
 
             if (base64File) {
-                // Open the saved Base64 PDF
                 const win = window.open();
                 win.document.write(
                     `<iframe src="${base64File}" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>`
                 );
             } else {
-                // Fallback if file isn't in storage (e.g. cleared cache or file too large)
-                alert(`Simulating preview for: ${this.user.cvName}\n(Note: In this demo, only files uploaded recently are previewable due to browser storage limits.)`);
+                alert(`Simulating preview for: ${this.user.cvName}`);
                 window.open('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', '_blank');
             }
         },
+
+        // --- UPDATED: Delete Logic ---
+        // 1. Trigger the Modal
         removeCv() {
-            if (confirm("Are you sure you want to remove your CV?")) {
-                this.user.cvName = null;
-            }
+            this.showDeleteModal = true;
+        },
+
+        // 2. Actually Delete (Called from Modal)
+        confirmDeleteCv() {
+            this.user.cvName = null;
+            this.showDeleteModal = false;
+
+            // Show Green Toast
+            this.successMessage = "Resume removed successfully.";
+            this.showSuccessNotification = true;
+            setTimeout(() => { this.showSuccessNotification = false; }, 3000);
+        },
+
+        // 3. Cancel Delete
+        closeDeleteModal() {
+            this.showDeleteModal = false;
         },
 
         // --- SAVE ---
         saveProfile() {
             this.isSaving = true;
 
-            // Convert Skills back to simple string array
             const cleanSkills = this.user.skills.map(s => s.value).filter(v => v.trim() !== "");
-
-            // Filter empty experience/education rows
             const cleanExp = this.user.experience.filter(e => e.role.trim() !== "");
             const cleanEdu = this.user.education.filter(e => e.degree.trim() !== "");
 
@@ -154,7 +170,13 @@ createApp({
             setTimeout(() => {
                 localStorage.setItem('user', JSON.stringify(userToSave));
                 this.isSaving = false;
-                alert("Profile saved successfully!");
+
+                this.successMessage = "Profile saved successfully!";
+                this.showSuccessNotification = true;
+
+                setTimeout(() => {
+                    this.showSuccessNotification = false;
+                }, 3000);
             }, 800);
         },
 
