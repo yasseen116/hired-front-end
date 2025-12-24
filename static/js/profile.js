@@ -85,7 +85,7 @@ createApp({
                 const enrichedApps = await Promise.all(rawApps.map(async (app) => {
                     try {
                         const job = await JobModel.getById(app.jobId);
-                        return { ...app, jobTitle: job.title };
+                        return { ...app, jobTitle: job.title, company: job.company };
                     } catch (e) {
                         return { ...app, jobTitle: 'Job ID #' + app.jobId };
                     }

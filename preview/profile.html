@@ -303,7 +303,7 @@
                     <div v-else class="applications-list">
                         <div class="app-item" v-for="app in applications" :key="app.id">
                             <div class="app-info">
-                                <h4 class="app-job-title">[[ app.jobTitle ]]</h4>
+                                <h4 class="app-job-title">[[ app.jobTitle ]] at [[ app.company ]]</h4>
                                 <span class="app-date">Applied on: [[ app.appliedAt ]]</span>
                             </div>
                             <div class="app-status">
