@@ -239,7 +239,7 @@ const JobModel = {
             company: "Palm Hills Developments",
             location: "Sheikh Zayed",
             experience: "3-5 Years",
-            salary: "Negotiable",
+            salary: "45,000 - 55,000 EGP",
             logoUrl: "../static/images/companies/palm.png",
             type: "On-site",
             description: [
@@ -964,7 +964,7 @@ const JobModel = {
             company: "Palm Hills Developments",
             location: "Madinaty, Cairo",
             experience: "3-5 Years",
-            salary: "15,000 - 20,000 EGP",
+            salary: "40,000 - 50,000 EGP",
             logoUrl: "../static/images/companies/palm.png",
             type: "On-site",
             description: [
