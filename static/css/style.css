@@ -880,7 +880,7 @@ body {
     margin-left: 30px;
     margin-right: 30px;
     margin-bottom: 40px;
-    margin-top: 40px;
+    margin-top: 25px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -894,7 +894,7 @@ body {
     border-radius: 10px;
     background: #fff;
     height: fit-content;
-    margin-top: 40px;
+    margin-top: 25px;
     margin-right: 25px;
     margin-bottom: 40px;
     position: sticky;

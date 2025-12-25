@@ -67,6 +67,20 @@
             </div>
 
             <div class="filter-group">
+                <label>Salary Range (EGP)</label>
+                <div class="checkbox-group" style="display:block;">
+                    <div style="margin-bottom: 10px;">
+                        <span style="color:#555; font-size:0.9rem;">Min: [[ formatCurrency(filters.salaryMin) ]]</span>
+                        <input type="range" min="0" max="100000" step="1000" v-model.number="filters.salaryMin" />
+                    </div>
+                    <div>
+                        <span style="color:#555; font-size:0.9rem;">Max: [[ formatCurrency(filters.salaryMax) ]]</span>
+                        <input type="range" min="0" max="100000" step="1000" v-model.number="filters.salaryMax" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-group">
                 <label>City</label>
                 <div class="checkbox-group">
                     <label><input type="checkbox" value="Cairo" v-model="filters.city"> Cairo</label>
@@ -81,19 +95,6 @@
                 </div>
             </div>
 
-            <div class="filter-group">
-                <label>Salary Range (EGP)</label>
-                <div class="checkbox-group" style="display:block;">
-                    <div style="margin-bottom: 10px;">
-                        <span style="color:#555; font-size:0.9rem;">Min: [[ formatCurrency(filters.salaryMin) ]]</span>
-                        <input type="range" min="0" max="100000" step="1000" v-model.number="filters.salaryMin" />
-                    </div>
-                    <div>
-                        <span style="color:#555; font-size:0.9rem;">Max: [[ formatCurrency(filters.salaryMax) ]]</span>
-                        <input type="range" min="0" max="100000" step="1000" v-model.number="filters.salaryMax" />
-                    </div>
-                </div>
-            </div>
 
             <div class="filter-group">
                 <label>Job Category</label>
