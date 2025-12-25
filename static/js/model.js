@@ -353,9 +353,9 @@ const JobModel = {
             id: 13,
             title: "Full Stack Developer",
             company: "IBM",
-            location: "Giza Systems, Giza",
+            location: "Giza",
             experience: "3-5 Years",
-            salary: "EGP 37,500",
+            salary: "EGP 50,000",
             logoUrl: "../static/images/companies/ibm.png",
             type: "On-site",
             description: [
