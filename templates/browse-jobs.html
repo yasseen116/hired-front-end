@@ -18,8 +18,8 @@
 
                 <div class="all-jobs-grid" v-else>
                     
-                    <div class="job-card" v-for="job in filteredJobs" :key="job.id">
-    
+                    <div class="job-card" v-for="job in paginatedJobs" :key="job.id">
+
                         <h3 class="job-title">[[ job.title ]]</h3>
                         
                         <div class="job-card-logo">
@@ -43,12 +43,20 @@
                     </div>
 
                 </div>
+
+                <!-- Pagination controls -->
+                <div v-if="filteredJobs.length > 0" class="pagination" style="display:flex; gap:10px; align-items:center; justify-content:center; margin: 20px 0 40px;">
+                    <button class="btn btn-card-details" :style="page === 1 ? 'visibility:hidden;' : ''" @click="prevPage">Previous</button>
+                    <span>Page [[ page ]] of [[ totalPages ]]</span>
+                    <button class="btn btn-card-details" :style="page === totalPages ? 'visibility:hidden;' : ''" @click="nextPage">Next</button>
+                </div>
             </div>        
         </div>
 
         <div class="filters">
             <h3>Filters</h3>
             
+
             <div class="filter-group">
                 <label>Job Type</label>
                 <div class="checkbox-group">
@@ -63,18 +71,39 @@
                 <div class="checkbox-group">
                     <label><input type="checkbox" value="Cairo" v-model="filters.city"> Cairo</label>
                     <label><input type="checkbox" value="Giza" v-model="filters.city"> Giza</label>
-                    <label><input type="checkbox" value="Alexandria" v-model="filters.city"> Alexandria</label>
+                    <label><input type="checkbox" value="New Cairo" v-model="filters.city"> New Cairo</label>
+                    <label><input type="checkbox" value="Nasr City" v-model="filters.city"> Nasr City</label>
+                    <label><input type="checkbox" value="Maadi" v-model="filters.city"> Maadi</label>
+                    <label><input type="checkbox" value="Sheikh Zayed" v-model="filters.city"> Sheikh Zayed</label>
+                    <label><input type="checkbox" value="10th of Ramadan" v-model="filters.city"> 10th of Ramadan</label>
+                    <label><input type="checkbox" value="6th of October" v-model="filters.city"> 6th of October</label>
+                    <label><input type="checkbox" value="New Administrative Capital" v-model="filters.city"> New Capital</label>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label>Salary Range (EGP)</label>
+                <div class="checkbox-group" style="display:block;">
+                    <div style="margin-bottom: 10px;">
+                        <span style="color:#555; font-size:0.9rem;">Min: [[ formatCurrency(filters.salaryMin) ]]</span>
+                        <input type="range" min="0" max="100000" step="1000" v-model.number="filters.salaryMin" />
+                    </div>
+                    <div>
+                        <span style="color:#555; font-size:0.9rem;">Max: [[ formatCurrency(filters.salaryMax) ]]</span>
+                        <input type="range" min="0" max="100000" step="1000" v-model.number="filters.salaryMax" />
+                    </div>
                 </div>
             </div>
 
             <div class="filter-group">
                 <label>Job Category</label>
                 <div class="checkbox-group">
-                    <label><input type="checkbox" value="Accounting" v-model="filters.category"> Accounting</label>
+                    <label><input type="checkbox" value="Accountant" v-model="filters.category"> Accounting</label>
                     <label><input type="checkbox" value="Sales" v-model="filters.category"> Sales</label>
-                    <label><input type="checkbox" value="Software" v-model="filters.category"> Software Development</label>
+                    <label><input type="checkbox" value="Software" v-model="filters.category"> Software Dev/Eng</label>
                     <label><input type="checkbox" value="Marketing" v-model="filters.category"> Marketing</label>
-                    <label><input type="checkbox" value="Engineering" v-model="filters.category"> Engineering</label>
+                    <label><input type="checkbox" value="Architect" v-model="filters.category"> Architecting</label>
+                    <label><input type="checkbox" value="Engineer" v-model="filters.category"> Engineering</label>
                 </div>
             </div>
         </div>
@@ -164,10 +193,14 @@
             </div>
             <span>[[ successMessage ]]</span>
         </div>
-    </div>     
+    </div>
 {% endblock %}
 
 {% block scripts %}
     <script src="../static/js/model.js"></script>
     <script src="../static/js/browse-jobs.js"></script>
 {% endblock %}
+<!-- Scoped style for invisible pagination buttons -->
+<style>
+.invisible-btn { visibility: hidden; }
+</style>

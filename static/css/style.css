@@ -856,7 +856,7 @@ body {
 }
 
 .browse-jobs {
-    width :90%
+    width :100%;
 }
 
 .page {
@@ -894,14 +894,17 @@ body {
     border-radius: 10px;
     background: #fff;
     height: fit-content;
-    margin-top: 20px;
+    margin-top: 40px;
     margin-right: 25px;
     margin-bottom: 40px;
     position: sticky;
-    top: 30px;
+    top: 50px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
 }
 
 .filters h3 {
+    margin-top: 0;
     margin-bottom: 15px;
     text-align: center;
     color: var(--primary-color);

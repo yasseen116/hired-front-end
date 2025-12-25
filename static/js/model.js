@@ -7,7 +7,7 @@ const JobModel = {
             company: "Microsoft",
             location: "Smart Village, Cairo",
             experience: "2-4 Years",
-            salary: "Negotiable",
+            salary: "EGP 35,000",
             logoUrl: "../static/images/companies/microsoft.png",
             type: "Hybrid",
             description: [
@@ -36,7 +36,7 @@ const JobModel = {
             company: "IBM",
             location: "Giza",
             experience: "3-5 Years",
-            salary: "Negotiable",
+            salary: "EGP 30,000",
             logoUrl: "../static/images/companies/ibm.png",
             type: "Remote",
             description: [
@@ -65,7 +65,7 @@ const JobModel = {
             company: "Vodafone",
             location: "Smart Village, Cairo",
             experience: "1-3 Years",
-            salary: "15K - 25K EGP",
+            salary: "EGP 20,000",
             logoUrl: "../static/images/companies/vodafone.png",
             type: "On-site",
             description: [
@@ -94,7 +94,7 @@ const JobModel = {
             company: "CIB",
             location: "New Cairo",
             experience: "2-5 Years",
-            salary: "Negotiable",
+            salary: "EGP 22,000",
             logoUrl: "../static/images/companies/cib.png",
             type: "On-site",
             description: [
@@ -121,9 +121,9 @@ const JobModel = {
             id: 5,
             title: "Financial Analyst",
             company: "National Bank of Egypt",
-            location: "Downtown Cairo",
+            location: "Downtown, Cairo",
             experience: "3-6 Years",
-            salary: "Negotiable",
+            salary: "EGP 25,000",
             logoUrl: "../static/images/companies/nbe.png",
             type: "On-site",
             description: [
@@ -152,7 +152,7 @@ const JobModel = {
             company: "ValU",
             location: "Nasr City",
             experience: "0-2 Years",
-            salary: "6K - 10K + Commission",
+            salary: "EGP 8,000",
             logoUrl: "../static/images/companies/valu.webp",
             type: "On-site",
             description: [
@@ -181,7 +181,7 @@ const JobModel = {
             company: "Breadfast",
             location: "Maadi",
             experience: "1-3 Years",
-            salary: "8K - 12K EGP",
+            salary: "EGP 10,000",
             logoUrl: "../static/images/companies/breadfast.png",
             type: "On-site",
             description: [
@@ -210,7 +210,7 @@ const JobModel = {
             company: "Elsewedy Electric",
             location: "10th of Ramadan City",
             experience: "2-4 Years",
-            salary: "Negotiable",
+            salary: "EGP 18,000",
             logoUrl: "../static/images/companies/elsewedy.png",
             type: "On-site",
             description: [
@@ -239,7 +239,7 @@ const JobModel = {
             company: "Palm Hills Developments",
             location: "Sheikh Zayed",
             experience: "3-5 Years",
-            salary: "45,000 - 55,000 EGP",
+            salary: "EGP 50,000",
             logoUrl: "../static/images/companies/palm.png",
             type: "On-site",
             description: [
@@ -268,7 +268,7 @@ const JobModel = {
             company: "Edita",
             location: "6th of October",
             experience: "1-3 Years",
-            salary: "7K - 10K EGP",
+            salary: "EGP 8,500",
             logoUrl: "../static/images/companies/edita.png",
             type: "On-site",
             description: [
@@ -295,9 +295,9 @@ const JobModel = {
             id: 11,
             title: "Senior Backend Engineer",
             company: "Dell Technologies",
-            location: "New Cairo, Cairo",
+            location: "New Cairo",
             experience: "5+ Years",
-            salary: "Negotiable",
+            salary: "EGP 45,000",
             logoUrl: "../static/images/companies/dell.png",
             type: "Remote",
             description: [
@@ -326,7 +326,7 @@ const JobModel = {
             company: "Vodafone",
             location: "Smart Village, Giza",
             experience: "1-3 Years",
-            salary: "15,000 - 25,000 EGP",
+            salary: "EGP 20,000",
             logoUrl: "../static/images/companies/vodafone.png",
             type: "Hybrid",
             description: [
@@ -355,7 +355,7 @@ const JobModel = {
             company: "IBM",
             location: "Giza Systems, Giza",
             experience: "3-5 Years",
-            salary: "30,000 - 45,000 EGP",
+            salary: "EGP 37,500",
             logoUrl: "../static/images/companies/ibm.png",
             type: "On-site",
             description: [
@@ -384,7 +384,7 @@ const JobModel = {
             company: "Orange Business",
             location: "City Stars, Cairo",
             experience: "2-4 Years",
-            salary: "Negotiable",
+            salary: "EGP 28,000",
             logoUrl: "../static/images/companies/orange.png",
             type: "Hybrid",
             description: [
@@ -413,7 +413,7 @@ const JobModel = {
             company: "Instabug",
             location: "Maadi, Cairo",
             experience: "2-5 Years",
-            salary: "Competitive (USD)",
+            salary: "EGP 40,000",
             logoUrl: "../static/images/companies/instabug.png",
             type: "Hybrid",
             description: [
@@ -442,7 +442,7 @@ const JobModel = {
             company: "Fawry",
             location: "Smart Village, Cairo",
             experience: "1-3 Years",
-            salary: "12,000 - 20,000 EGP",
+            salary: "EGP 16,000",
             logoUrl: "../static/images/companies/fawry.png",
             type: "On-site",
             description: [
@@ -469,9 +469,9 @@ const JobModel = {
             id: 17,
             title: "Senior Accountant",
             company: "CIB",
-            location: "New Cairo, Cairo",
+            location: "New Cairo",
             experience: "3-5 Years",
-            salary: "18,000 - 25,000 EGP",
+            salary: "EGP 21,500",
             logoUrl: "../static/images/companies/cib.png",
             type: "On-site",
             description: [
@@ -500,7 +500,7 @@ const JobModel = {
             company: "Orascom",
             location: "New Administrative Capital",
             experience: "2-4 Years",
-            salary: "Negotiable",
+            salary: "EGP 20,000",
             logoUrl: "../static/images/companies/orascom.png",
             type: "On-site",
             description: [
@@ -529,7 +529,7 @@ const JobModel = {
             company: "Juhayna",
             location: "6th of October, Giza",
             experience: "1-3 Years",
-            salary: "10,000 - 15,000 EGP",
+            salary: "EGP 12,500",
             logoUrl: "../static/images/companies/juhayna.png",
             type: "Hybrid",
             description: [
@@ -558,7 +558,7 @@ const JobModel = {
             company: "Raya Contact Center",
             location: "Maadi, Cairo",
             experience: "0-1 Years",
-            salary: "7,000 - 9,000 EGP",
+            salary: "EGP 8,000",
             logoUrl: "../static/images/companies/raya.png",
             type: "On-site",
             description: [
@@ -587,7 +587,7 @@ const JobModel = {
             company: "AstraZeneca Egypt",
             location: "Nasr City, Cairo",
             experience: "1-3 Years",
-            salary: "Competitive + Commission",
+            salary: "EGP 14,000",
             logoUrl: "../static/images/companies/astrazeneca.png",
             type: "On-site",
             description: [
@@ -614,9 +614,9 @@ const JobModel = {
             id: 22,
             title: "Sales Executive",
             company: "Mountain View",
-            location: "New Cairo, Cairo",
+            location: "New Cairo",
             experience: "2-5 Years",
-            salary: "12,000 + High Commission",
+            salary: "EGP 12,000",
             logoUrl: "../static/images/companies/mountainview.webp",
             type: "On-site",
             description: [
@@ -643,9 +643,9 @@ const JobModel = {
             id: 23,
             title: "HR Specialist",
             company: "Etisalat Egypt",
-            location: "New Cairo, Cairo",
+            location: "New Cairo",
             experience: "2-4 Years",
-            salary: "14,000 - 18,000 EGP",
+            salary: "EGP 16,000",
             logoUrl: "../static/images/companies/etisalat.png",
             type: "Hybrid",
             description: [
@@ -674,7 +674,7 @@ const JobModel = {
             company: "Unilever",
             location: "6th of October, Giza",
             experience: "1-3 Years",
-            salary: "11,000 - 16,000 EGP",
+            salary: "EGP 13,500",
             logoUrl: "../static/images/companies/unilever.png",
             type: "On-site",
             description: [
@@ -703,7 +703,7 @@ const JobModel = {
             company: "EFG Hermes",
             location: "Smart Village, Giza",
             experience: "2-4 Years",
-            salary: "Negotiable",
+            salary: "EGP 25,000",
             logoUrl: "../static/images/companies/efg.png",
             type: "Hybrid",
             description: [
@@ -732,7 +732,7 @@ const JobModel = {
             company: "Tarek Nour Communications",
             location: "Zamalek, Cairo",
             experience: "2-5 Years",
-            salary: "10,000 - 18,000 EGP",
+            salary: "EGP 14,000",
             logoUrl: "../static/images/companies/tareknour.png",
             type: "On-site",
             description: [
@@ -761,7 +761,7 @@ const JobModel = {
             company: "Elsewedy Electric",
             location: "10th of Ramadan City",
             experience: "3-6 Years",
-            salary: "15,000 - 22,000 EGP",
+            salary: "EGP 18,500",
             logoUrl: "../static/images/companies/elsewedy.png",
             type: "On-site",
             description: [
@@ -790,7 +790,7 @@ const JobModel = {
             company: "British Council Egypt",
             location: "Agouza, Giza",
             experience: "2+ Years",
-            salary: "Hourly / Competitive",
+            salary: "EGP 15,000",
             logoUrl: "../static/images/companies/britishcouncil.png",
             type: "On-site",
             description: [
@@ -819,7 +819,7 @@ const JobModel = {
             company: "Talabat",
             location: "Maadi, Cairo",
             experience: "5-7 Years",
-            salary: "Negotiable",
+            salary: "EGP 40,000",
             logoUrl: "../static/images/companies/talabat.png",
             type: "Hybrid",
             description: [
@@ -848,7 +848,7 @@ const JobModel = {
             company: "El Ezaby Pharmacy",
             location: "Heliopolis, Cairo",
             experience: "0-2 Years",
-            salary: "6,000 - 9,000 EGP",
+            salary: "EGP 7,500",
             logoUrl: "../static/images/companies/elezaby.png",
             type: "On-site",
             description: [
@@ -877,7 +877,7 @@ const JobModel = {
             company: "EgyptAir Hospital",
             location: "Heliopolis, Cairo",
             experience: "1-3 Years",
-            salary: "7,000 - 10,000 EGP",
+            salary: "EGP 8,500",
             logoUrl: "../static/images/companies/egyptairhospital.jpg",
             type: "On-site",
             description: [
@@ -906,7 +906,7 @@ const JobModel = {
             company: "Ghabbour Auto",
             location: "Abu Rawash, Giza",
             experience: "2-4 Years",
-            salary: "12,000 - 16,000 EGP",
+            salary: "EGP 14,000",
             logoUrl: "../static/images/companies/ghabbour.png",
             type: "On-site",
             description: [
@@ -935,7 +935,7 @@ const JobModel = {
             company: "Mawdoo3",
             location: "Remote (Egypt)",
             experience: "1-3 Years",
-            salary: "Piece-rate / Monthly",
+            salary: "EGP 9,000",
             logoUrl: "../static/images/companies/mawdoo3.png",
             type: "Remote",
             description: [
@@ -964,7 +964,7 @@ const JobModel = {
             company: "Palm Hills Developments",
             location: "Madinaty, Cairo",
             experience: "3-5 Years",
-            salary: "40,000 - 50,000 EGP",
+            salary: "EGP 45,000",
             logoUrl: "../static/images/companies/palm.png",
             type: "On-site",
             description: [
@@ -993,7 +993,7 @@ const JobModel = {
             company: "Marriott Hotels",
             location: "Zamalek, Cairo",
             experience: "0-2 Years",
-            salary: "6,000 - 8,000 EGP",
+            salary: "EGP 7,000",
             logoUrl: "../static/images/companies/marriott.png",
             type: "On-site",
             description: [
@@ -1022,7 +1022,7 @@ const JobModel = {
             company: "EgyptAir",
             location: "Cairo International Airport",
             experience: "0-2 Years",
-            salary: "Negotiable",
+            salary: "EGP 13,000",
             logoUrl: "../static/images/companies/egyptair.png",
             type: "On-site",
             description: [
