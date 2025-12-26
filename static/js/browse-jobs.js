@@ -4,17 +4,16 @@ createApp({
     data() {
         return {
             isLoading: true,
-            allJobs: [],
+            allJobs: [], // Will now store data from FastAPI
+            errorMessage: null, // To show API errors
 
-            // 1. ADDED: Search Query State
+            // Search & Filters
             searchQuery: '',
-
             filters: {
                 type: [],
                 city: [],
                 category: [],
                 company: [],
-                // NEW: salary range
                 salaryMin: 0,
                 salaryMax: 100000
             },
@@ -36,10 +35,10 @@ createApp({
 
     computed: {
         filteredJobs() {
-            // Start with all jobs
+            // Start with all jobs loaded from API
             let result = this.allJobs;
 
-            // 1. SEARCH FILTER (New Logic)
+            // 1. SEARCH FILTER
             if (this.searchQuery) {
                 const q = this.searchQuery.toLowerCase();
                 result = result.filter(job =>
@@ -48,18 +47,17 @@ createApp({
                 );
             }
 
-            // SALARY RANGE FILTER
+            // 2. SALARY RANGE FILTER
             const min = this.filters.salaryMin;
             const max = this.filters.salaryMax;
             result = result.filter(job => {
                 const s = this.parseSalary(job.salary);
-                // If salary cannot be parsed, include by default
-                if (s == null) return true;
+                if (s == null) return true; // Include jobs with unparseable salaries
                 return s >= min && s <= max;
             });
 
-            // 2. CHECKBOX FILTERS
-            // If no checkboxes are selected, return the result (which might already be filtered by search)
+            // 3. CHECKBOX FILTERS
+            // If no checkboxes selected, return current result
             if (this.filters.type.length === 0 &&
                 this.filters.city.length === 0 &&
                 this.filters.category.length === 0 &&
@@ -69,12 +67,13 @@ createApp({
 
             // Apply Checkbox Logic
             return result.filter(job => {
-                const jobType = job.type.includes('Remote') ? 'Remote' :
-                    job.type.includes('Hybrid') ? 'Hybrid' : 'On-site';
+                // Map API data to Filter categories
+                // Note: API might return "On-site", "Hybrid", "Remote" directly.
+                const jobType = job.type || 'On-site';
 
                 const matchesWorkplace = this.filters.type.length === 0 || this.filters.type.includes(jobType);
                 const matchesCity = this.filters.city.length === 0 || this.filters.city.some(city => job.location.includes(city));
-                const matchesCategory = this.filters.category.length === 0 || this.filters.category.some(cat => job.title.includes(cat) || job.company.includes(cat));
+                const matchesCategory = this.filters.category.length === 0 || this.filters.category.some(cat => job.category === cat || job.category.includes(cat));
                 const matchesCompany = this.filters.company.length === 0 || this.filters.company.includes(job.company);
 
                 return matchesWorkplace && matchesCity && matchesCategory && matchesCompany;
@@ -90,28 +89,19 @@ createApp({
     },
 
     async mounted() {
-        try {
-            // 1. Fetch Data
-            this.allJobs = await JobModel.getAll();
+        // --- KEY CHANGE: FETCH FROM API ---
+        this.fetchJobs();
 
-            // 2. CAPTURE URL SEARCH PARAMETER
-            const urlParams = new URLSearchParams(window.location.search);
-            const searchParam = urlParams.get('search');
-
-            if (searchParam) {
-                this.searchQuery = searchParam;
-            }
-
-        } catch (error) {
-            console.error("Error loading jobs:", error);
-        } finally {
-            this.isLoading = false;
+        // Capture URL Search Parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchParam = urlParams.get('search');
+        if (searchParam) {
+            this.searchQuery = searchParam;
         }
     },
 
     watch: {
         'filters.salaryMin'(val) {
-            // clamp and enforce relation
             if (val < 0) this.filters.salaryMin = 0;
             if (val > 100000) this.filters.salaryMin = 100000;
             if (this.filters.salaryMin > this.filters.salaryMax) {
@@ -119,7 +109,6 @@ createApp({
             }
         },
         'filters.salaryMax'(val) {
-            // clamp and enforce relation
             if (val < 0) this.filters.salaryMax = 0;
             if (val > 100000) this.filters.salaryMax = 100000;
             if (this.filters.salaryMax < this.filters.salaryMin) {
@@ -127,30 +116,50 @@ createApp({
             }
         },
         filteredJobs() {
-            // reset to first page when filters/search change result set
-            this.page = 1;
+            this.page = 1; // Reset to page 1 on filter change
         }
     },
 
     methods: {
-        // Parse salary from various formats like "EGP 20,000 - 30,000", "15k", "20000"
+        // --- NEW METHOD: CONNECT TO BACKEND ---
+        async fetchJobs() {
+            try {
+                this.isLoading = true;
+                // Fetch from your local API
+                const response = await fetch('http://127.0.0.1:8000/api/jobs');
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log("Jobs loaded from API:", data);
+
+                // Assign API data to Vue state
+                this.allJobs = data;
+
+            } catch (error) {
+                console.error("Failed to fetch jobs:", error);
+                this.errorMessage = "Could not load jobs. Make sure the backend is running.";
+            } finally {
+                this.isLoading = false;
+            }
+        },
+
+        // --- EXISTING HELPER METHODS ---
         parseSalary(salaryText) {
             if (!salaryText) return null;
             try {
                 let text = String(salaryText).toLowerCase();
-                // Remove common tokens
                 text = text.replace(/egp|\$|usd|eur|sar|aed|per\s*month|\/month|per\s*year|\/year|net|gross/g, '');
-                // Remove commas and spaces to keep numbers intact
                 text = text.replace(/[,\s]+/g, '');
 
-                // Handle ranges like "20000-30000" or "15k-25k"
                 const rangeMatch = text.match(/(\d+(?:\.\d+)?[km]?)-(\d+(?:\.\d+)?[km]?)/);
                 if (rangeMatch) {
                     const a = this._toNumber(rangeMatch[1]);
                     const b = this._toNumber(rangeMatch[2]);
                     return Math.min(a, b);
                 }
-                // Single value like "35000" or "15k"
                 const singleMatch = text.match(/(\d+(?:\.\d+)?[km]?)/);
                 if (singleMatch) {
                     return this._toNumber(singleMatch[1]);
@@ -171,20 +180,19 @@ createApp({
         },
 
         goToDetails(jobId) {
+            // Update URL to match backend ID
             window.location.href = `job-details.html?id=${jobId}`;
         },
 
-        // --- SHARED MODAL LOGIC ---
+        // --- MODAL LOGIC (Kept as is, but logic will need backend update later) ---
         openApplyModal(job) {
-            const user = localStorage.getItem('user');
-
+            const user = localStorage.getItem('user'); // Still using mock user
             if (!user) {
                 this.showLoginNotification = true;
                 setTimeout(() => { window.location.href = 'login.html'; }, 2000);
                 return;
             }
-
-            this.selectedJobForApp = job || this.job;
+            this.selectedJobForApp = job;
             this.showApplyModal = true;
             this.newCvName = null;
         },
@@ -200,28 +208,22 @@ createApp({
         },
 
         async applyWithExisting() {
+            // TODO: CONNECT TO BACKEND APPLY ROUTE
             this.isApplying = true;
-            try {
-                const response = await ApplicationModel.submit(this.selectedJobForApp.id, 'existing');
-                this.handleApplicationResult(response);
-            } catch (error) {
-                alert("An error occurred.");
-            } finally {
+            setTimeout(() => {
+                this.handleApplicationResult({ success: true, message: "Mock Application Sent!" });
                 this.isApplying = false;
-            }
+            }, 1000);
         },
 
         async applyWithNew() {
             if (!this.newCvName) return;
+            // TODO: CONNECT TO BACKEND APPLY ROUTE
             this.isApplying = true;
-            try {
-                const response = await ApplicationModel.submit(this.selectedJobForApp.id, 'new', this.newCvName);
-                this.handleApplicationResult(response);
-            } catch (error) {
-                alert("An error occurred.");
-            } finally {
+            setTimeout(() => {
+                this.handleApplicationResult({ success: true, message: "Mock Application Sent!" });
                 this.isApplying = false;
-            }
+            }, 1000);
         },
 
         handleApplicationResult(response) {
