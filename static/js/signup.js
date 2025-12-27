@@ -3,16 +3,22 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+            role: 'seeker', // Default role
+
             fullname: '',
             jobTitle: '',
+            companyName: '', // For Providers
+
             skills: [{ id: Date.now(), value: '' }],
             cvFile: null,
+            fileName: null,
+
             email: '',
             password: '',
             confirmPassword: '',
+
             isLoading: false,
             errorMessage: null,
-            fileName: null,
         }
     },
 
@@ -35,39 +41,21 @@ createApp({
             }
         },
 
-        // --- NEW: API SIMULATION FOR FILE UPLOAD ---
         simulateFileUpload(file) {
             return new Promise((resolve, reject) => {
-                console.log(`[API] Uploading file: ${file.name}...`);
-
-                // 1. Create FileReader to convert file to Base64 string
                 const reader = new FileReader();
-
                 reader.onload = (e) => {
                     const base64String = e.target.result;
-
-                    // Simulate network delay
                     setTimeout(() => {
-                        // 2. Save the ACTUAL file data to LocalStorage (Simulation of S3/Database)
-                        // WARNING: LocalStorage has a size limit (usually 5MB). Large PDFs might fail.
                         try {
                             localStorage.setItem('user_cv_file', base64String);
-
-                            const fileData = {
-                                fileName: file.name,
-                                uploadDate: new Date().toLocaleDateString(),
-                                status: 'uploaded'
-                            };
-                            console.log("[API] File uploaded successfully.");
-                            resolve(fileData);
+                            resolve({ fileName: file.name });
                         } catch (err) {
-                            console.warn("File too large for LocalStorage simulation. Using mock.");
-                            resolve({ fileName: file.name, status: 'error_too_large' });
+                            console.warn("File too large for storage.");
+                            resolve({ fileName: file.name });
                         }
                     }, 1500);
                 };
-
-                // Start reading the file
                 reader.readAsDataURL(file);
             });
         },
@@ -76,46 +64,57 @@ createApp({
             this.isLoading = true;
             this.errorMessage = null;
 
-            // 1. Validation
+            // 1. Common Validation
             if (this.password !== this.confirmPassword) {
                 this.errorMessage = "Passwords do not match!";
                 this.isLoading = false;
                 return;
             }
 
-            const cleanSkills = this.skills
-                .map(s => s.value)
-                .filter(val => val.trim() !== "");
-
             try {
-                // 2. SIMULATE CV UPLOAD (If a file was selected)
                 let uploadedCvName = null;
+                let cleanSkills = [];
 
-                if (this.cvFile) {
-                    // Wait for the "upload" to finish
-                    const uploadResult = await this.simulateFileUpload(this.cvFile);
-                    uploadedCvName = uploadResult.fileName;
+                // 2. Seeker Specific Logic
+                if (this.role === 'seeker') {
+                    cleanSkills = this.skills.map(s => s.value).filter(val => val.trim() !== "");
+
+                    if (this.cvFile) {
+                        const uploadResult = await this.simulateFileUpload(this.cvFile);
+                        uploadedCvName = uploadResult.fileName;
+                    }
                 }
 
-                // 3. SIMULATE ACCOUNT CREATION API
+                // 3. API Delay Simulation
                 await new Promise(resolve => setTimeout(resolve, 1000));
 
-                // 4. CREATE USER OBJECT (Database Row Simulation)
+                // 4. Construct User Object
                 const user = {
                     name: this.fullname,
                     email: this.email,
                     jobTitle: this.jobTitle,
-                    skills: cleanSkills,
-                    // Save the CV Name we got from the "Upload API"
-                    cvName: uploadedCvName,
+                    role: this.role, // SAVE THE ROLE!
                     token: "new-user-token-123"
                 };
 
-                // 5. SAVE TO LOCAL STORAGE (Simulates DB persistence)
+                // Add specific fields based on role
+                if (this.role === 'seeker') {
+                    user.skills = cleanSkills;
+                    user.cvName = uploadedCvName;
+                    user.experience = [];
+                    user.education = [];
+                } else {
+                    user.company = this.companyName;
+                }
+
+                // 5. Save & Redirect
                 localStorage.setItem('user', JSON.stringify(user));
 
-                // 6. REDIRECT TO HOME PAGE
-                window.location.href = 'index.html';
+                if (this.role === 'provider') {
+                    window.location.href = 'dashboard.html'; // Provider -> Dashboard
+                } else {
+                    window.location.href = 'index.html'; // Seeker -> Home
+                }
 
             } catch (error) {
                 console.error(error);
