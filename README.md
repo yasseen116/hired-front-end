@@ -1,44 +1,62 @@
-# fitnessWay
+# Hired (Job seeking Project) — Documentation
 
-Simple guide to help teammates (especially on Windows with VS Code) share their SSH keys and connect to the repository.
+A short, focused reference for the Hired frontend (a.k.a. fitnessWay).
 
-## 1. Prepare Windows workstation
-- Install [Git for Windows](https://git-scm.com/download/win) and keep the default option that enables "Git from the command line".
-- Install [Visual Studio Code](https://code.visualstudio.com/) and sign in so settings sync across machines.
-- Optional: install the official GitHub VS Code extension for an integrated Pull Request experience.
+## 🚀 Project Overview
+**Hired** is a job listing and application front-end with server-backed data. It includes pages for browsing jobs, viewing job details, user registration and login, a wishlist (saved jobs), and a dashboard for users.
 
-## 2. Generate SSH keys and send the public key
-1. Open **PowerShell** (Win + X → Windows PowerShell).
-2. Run:
-   ```powershell
-   ssh-keygen -t ed25519 -C "your.email@example.com"
-   ```
-   Press Enter to accept the default file location `C:\Users\<you>\.ssh\id_ed25519` and choose a passphrase you will remember.
-3. Display the public key:
-   ```powershell
-   Get-Content $env:USERPROFILE\.ssh\id_ed25519.pub
-   ```
-4. Copy the entire line (it starts with `ssh-ed25519`) and send it to the repo maintainer so it can be added to GitHub, **or** paste it yourself under **GitHub → Settings → SSH and GPG keys → New SSH key**.
+---
 
-## 3. Verify access to GitHub over SSH
-```powershell
-ssh -T git@github.com
-```
-Type `yes` if prompted to trust GitHub. You should see a "successfully authenticated" message.
+## 🧰 Technology
+- **Frontend:** HTML, CSS, JavaScript (vanilla)
+- **Templating:** Jinja2 templates in `/templates` (server-rendered pages)
+- **Backend (API):** FastAPI (expected API base: `http://127.0.0.1:8000/api`)
+- **Database:** SQLite (SQLAlchemy models in `backend/models/`)
+- **ORM:** SQLAlchemy
+- **Static assets:** `/static` (CSS, JS, images)
+- **Dev server:** uvicorn (see `requirements.txt`)
+- **Architecture:** Frontend follows an **MVC** pattern (templates = Views, `static/js` = Controllers, `static/js/model.js` = client Models). Backend is designed for a **microservices** architecture (e.g., `auth-service`, `jobs-service`, `applications-service`).
 
-## 4. Clone and open the repo in VS Code
-1. Open VS Code → `Ctrl+Shift+P` → **Git: Clone**.
-2. Paste the repo URL: `git@github.com:yasseen116/fitnessWay.git`.
-3. Choose a folder (e.g., `C:\dev\fitnessWay`). When the clone completes, click **Open** to load the workspace.
-4. When prompted, trust the authors so VS Code enables workspace features.
+> Files of interest:
+> - SQLAlchemy models: `backend/models/*.py` (User, Job, Application, Skill, SavedJob)
+> - Client API usage: `static/js/model.js` (uses `http://127.0.0.1:8000/api`) 
 
-## 5. Working with Git in VS Code
-- Make sure you are on the latest `main`: `Ctrl+Shift+P` → **Git: Pull**.
-- Create feature branches via the status bar branch menu (e.g., `feature/login-ui`).
-- Stage and commit changes in the Source Control sidebar, then push using the cloud icon.
-- Open pull requests through the GitHub extension or directly on github.com.
+---
 
-## 6. Common troubleshooting tips
-- If cloning fails, re-run `ssh -T git@github.com` to confirm the key is registered.
-- Ensure any corporate proxy allows SSH on port 22 or use GitHub's HTTPS fallback.
-- Keep Git, VS Code, and extensions updated for the best experience.
+## ✨ Features
+- Browse and search job listings
+- Job details page with similar-job suggestions
+- Apply to jobs (front-end application submission simulation)
+- Save/unsave jobs to a **Wishlist**
+- User profile and dashboard pages
+- Mock/company sections showing top companies
+- Server-side models: Users, Jobs, Applications, Skills, Saved Jobs
+
+---
+
+## 🧭 Project Structure (high level)
+- `app.py` — (placeholder) app entry (if present)
+- `backend/` — database configuration and models
+- `preview/` — static HTML previews you can open locally
+- `templates/` — server-rendered templates
+- `static/` — `css/`, `js/`, `images/`
+
+---
+
+## 🏛 Architecture Patterns
+- **Frontend (MVC):** The frontend follows an **MVC** pattern — `templates/` act as *Views*, `static/js/` contains *Controllers* (e.g., `main.js`, `browse-jobs.js`), and `static/js/model.js` acts as the client-side *Model* that communicates with backend APIs. This helps keep UI, state, and data access concerns separated.
+- **Backend (Microservices):** The backend is intended to use a **microservices** architecture — split functionality into small, focused services (for example: `auth-service`, `jobs-service`, `applications-service`). Each service owns its data and exposes a clear HTTP API under `/api` so services can be developed and deployed independently.
+
+---
+
+
+## 🔌 API (expected / common endpoints)
+The front-end JS calls these endpoints via `static/js/model.js`:
+- GET `/api/jobs` — list jobs
+- GET `/api/jobs/{id}` — job details
+- GET `/api/jobs/{id}/similar` — similar jobs
+
+Note: The repo expects a FastAPI backend; implement endpoints under `/api` to match the client calls.
+
+---
+
