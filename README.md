@@ -8,7 +8,7 @@ A short, focused reference for the Hired frontend (a.k.a. fitnessWay).
 ---
 
 ## 🧰 Technology
-- **Frontend:** HTML, CSS, JavaScript , viu 
+- **Frontend:** HTML, CSS, JavaScript , vue.js 
 - **Templating:** Jinja2 templates in `/templates` (server-rendered pages)
 - **Backend (API):** FastAPI (expected API base: `http://127.0.0.1:8000/api`)
 - **Database:** SQLite (SQLAlchemy models in `backend/models/`)
@@ -31,6 +31,11 @@ A short, focused reference for the Hired frontend (a.k.a. fitnessWay).
 - User profile and dashboard pages
 - Mock/company sections showing top companies
 - Server-side models: Users, Jobs, Applications, Skills, Saved Jobs
+
+---
+
+## 🖼️ Gallery
+See the full walkthrough with screenshots: [`gallery.md`](gallery.md)
 
 ---
 
@@ -70,6 +75,3 @@ Note: The repo expects a FastAPI backend; implement endpoints under `/api` to ma
 
 ### Use Case Diagram
 ![Use Case Diagram](static/images/Diagrams/use%20case%20diagram.jpg)
-
-
-
