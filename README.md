@@ -8,7 +8,7 @@ A short, focused reference for the Hired frontend (a.k.a. fitnessWay).
 ---
 
 ## 🧰 Technology
-- **Frontend:** HTML, CSS, JavaScript (vanilla)
+- **Frontend:** HTML, CSS, JavaScript , viu 
 - **Templating:** Jinja2 templates in `/templates` (server-rendered pages)
 - **Backend (API):** FastAPI (expected API base: `http://127.0.0.1:8000/api`)
 - **Database:** SQLite (SQLAlchemy models in `backend/models/`)
@@ -59,4 +59,17 @@ The front-end JS calls these endpoints via `static/js/model.js`:
 Note: The repo expects a FastAPI backend; implement endpoints under `/api` to match the client calls.
 
 ---
+
+## Diagrams ✅
+
+### Context Diagram
+![Context Diagram](static/images/Diagrams/Context%20diagram.jpg)
+
+### Class Diagram
+![Class Diagram](static/images/Diagrams/class%20diagram.jpg)
+
+### Use Case Diagram
+![Use Case Diagram](static/images/Diagrams/use%20case%20diagram.jpg)
+
+
 
